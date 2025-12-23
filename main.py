@@ -1,9 +1,8 @@
-import os
 import requests
-from datetime import datetime
+import os
 
-BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHAT_ID = os.environ["CHAT_ID"]
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -12,8 +11,7 @@ def send_telegram(msg):
         "text": msg,
         "parse_mode": "Markdown"
     }
-    requests.post(url, data=payload)
+    r = requests.post(url, data=payload)
+    print(r.text)
 
-now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-send_telegram(f"✅ *Telegram bot working*\n⏰ Time: `{now}`")
+send_telegram("✅ *price reduced..telegram bot working!*")
